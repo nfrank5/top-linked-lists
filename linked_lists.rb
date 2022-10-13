@@ -1,26 +1,37 @@
 class LinkedList
 
   def intialize
-    @nodes = nil
+    @head = nil
   end
 
   def append(value)
-    if @nodes.nil?
-      @nodes = Node.new(value)
+    if @head.nil?
+      @head = Node.new(value)
     else
-      last = @nodes.look_for_last_node
+      last = @head.look_for_last_node
       last.next_node = Node.new(value)
     end
   end
 
+  def prepend(value)
+    @head = Node.new(value, @head)
+  end
+
+  def size
+    Node.total_number_of_nodes
+  end
 end
 
 
 class Node
   attr_accessor :next_node
+
+  @@number_of_nodes = 0
+
   def initialize(value = nil, next_node = nil)
     @value = value
     @next_node = next_node
+    @@number_of_nodes += 1
   end
 
   def look_for_last_node
@@ -32,6 +43,10 @@ class Node
     else
       self
     end
+  end
+
+  def self.total_number_of_nodes
+    @@number_of_nodes
   end
 
 end
@@ -48,5 +63,5 @@ lista = LinkedList.new
 lista.append(1)
 lista.append(2)
 lista.append(3)
-
-p lista
+lista.prepend(0)
+p lista.size
