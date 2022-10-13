@@ -99,6 +99,21 @@ class LinkedList
     s.join(' ')
   end
 
+  def insert_at(value, index)
+    if at(index - 1).nil?
+      @head = Node.new(value, at(index))  
+    else
+      at(index - 1).next_node = Node.new(value, at(index))
+    end
+  end
+
+  def remove_at(index)
+    if at(index - 1).nil?
+      @head = at(index + 1) 
+    else
+      at(index - 1).next_node = at(index + 1)
+    end  
+  end
 end
 
 
@@ -131,7 +146,7 @@ lista = LinkedList.new
 
 
 lista.append(1)
-lista.append('string')
+lista.append(2)
 lista.append(3)
 lista.prepend(0)
 puts lista
@@ -144,5 +159,12 @@ p lista.at 2
 p lista.pop
 p lista.contains?(1)
 p lista.find(2)
+
+lista.insert_at("a", 3)
+
 puts lista
-p lista
+
+lista.remove_at(3)
+
+puts lista
+
