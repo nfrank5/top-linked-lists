@@ -20,6 +20,28 @@ class LinkedList
   def size
     Node.total_number_of_nodes
   end
+
+  def head
+    @head
+  end
+
+  def tail
+    @head.look_for_last_node
+  end
+
+  def at(index)
+    count = 0
+    current_node = @head
+    loop do
+      break if count == index || current_node.nil?
+
+      current_node = current_node.next_node
+      count += 1
+    end
+    current_node
+  end
+
+
 end
 
 
@@ -35,10 +57,7 @@ class Node
   end
 
   def look_for_last_node
-    p self
-    p self.next_node
-    gets
-    if self.next_node != nil
+    if !self.next_node.nil?
       self.next_node.look_for_last_node
     else
       self
@@ -48,6 +67,7 @@ class Node
   def self.total_number_of_nodes
     @@number_of_nodes
   end
+
 
 end
 
@@ -64,4 +84,8 @@ lista.append(1)
 lista.append(2)
 lista.append(3)
 lista.prepend(0)
+
 p lista.size
+p lista.head
+p lista.tail
+p lista.at 3
