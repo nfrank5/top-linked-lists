@@ -60,16 +60,33 @@ class LinkedList
   end
 
   def contains?(value)
-    contained = false
+    found = false
     current_node = @head
     loop do
-      contained = true if current_node.value == value
+      found = true if current_node.value == value
       break if current_node.next_node.nil? || current_node.value == value
 
       current_node = current_node.next_node
     end
-    contained
+    found
   end
+
+  def find(value)
+    found = nil
+    current_node = @head
+    count = 0
+    loop do
+      p count
+      found = count if current_node.value == value
+      break if current_node.next_node.nil? || current_node.value == value
+
+      current_node = current_node.next_node
+      count += 1
+    end
+    found
+  end
+
+
 end
 
 
@@ -113,4 +130,4 @@ p lista.at 2
 
 p lista.pop
 p lista.contains?(1)
-p lista
+p lista.find(2)
