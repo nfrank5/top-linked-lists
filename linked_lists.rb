@@ -86,6 +86,18 @@ class LinkedList
     found
   end
 
+  def to_s
+    s = []
+    current_node = @head
+    loop do
+      s.push("( #{current_node.value} ) ->")
+      break if current_node.next_node.nil?
+
+      current_node = current_node.next_node
+    end
+    s.push('nil')
+    s.join(' ')
+  end
 
 end
 
@@ -116,12 +128,13 @@ end
 
 
 lista = LinkedList.new
-p lista.pop
+
 
 lista.append(1)
-lista.append(2)
+lista.append('string')
 lista.append(3)
 lista.prepend(0)
+puts lista
 
 p lista.size
 p lista.head
@@ -131,3 +144,5 @@ p lista.at 2
 p lista.pop
 p lista.contains?(1)
 p lista.find(2)
+puts lista
+p lista
