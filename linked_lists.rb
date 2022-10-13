@@ -58,12 +58,24 @@ class LinkedList
     at(count-1).next_node = nil
     current_node
   end
+
+  def contains?(value)
+    contained = false
+    current_node = @head
+    loop do
+      contained = true if current_node.value == value
+      break if current_node.next_node.nil? || current_node.value == value
+
+      current_node = current_node.next_node
+    end
+    contained
+  end
 end
 
 
 class Node
-  attr_accessor :next_node
-
+  attr_accessor :next_node 
+  attr_reader :value
   @@number_of_nodes = 0
 
   def initialize(value = nil, next_node = nil)
@@ -98,5 +110,7 @@ p lista.size
 p lista.head
 p lista.tail
 p lista.at 2
+
 p lista.pop
+p lista.contains?(1)
 p lista
