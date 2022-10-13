@@ -120,6 +120,7 @@ end
 class Node
   attr_accessor :next_node 
   attr_reader :value
+
   @@number_of_nodes = 0
 
   def initialize(value = nil, next_node = nil)
@@ -133,14 +134,6 @@ class Node
   end
 
 end
-
-
-
-#e = Node.new(3)
-#w = Node.new(2,e)
-#q = Node.new(1,w)
-#p q.look_for_last_node
-
 
 lista = LinkedList.new
 
