@@ -1,5 +1,7 @@
 class LinkedList
 
+  attr_reader :head
+
   def intialize
     @head = nil
   end
@@ -8,8 +10,7 @@ class LinkedList
     if @head.nil?
       @head = Node.new(value)
     else
-      last = @head.look_for_last_node
-      last.next_node = Node.new(value)
+      tail.next_node = Node.new(value)
     end
   end
 
@@ -26,7 +27,13 @@ class LinkedList
   end
 
   def tail
-    @head.look_for_last_node
+    current_node = @head
+    loop do
+      break if current_node.next_node.nil?
+
+      current_node = current_node.next_node
+    end
+    current_node
   end
 
   def at(index)
@@ -41,6 +48,17 @@ class LinkedList
     current_node
   end
 
+  def pop
+    count = 0
+    current_node = @head
+    loop do
+      break if current_node.nil?
+
+      current_node = current_node.next_node
+      count += 1
+    end
+    current_node
+  end
 
 end
 
@@ -56,18 +74,9 @@ class Node
     @@number_of_nodes += 1
   end
 
-  def look_for_last_node
-    if !self.next_node.nil?
-      self.next_node.look_for_last_node
-    else
-      self
-    end
-  end
-
   def self.total_number_of_nodes
     @@number_of_nodes
   end
-
 
 end
 
@@ -88,4 +97,4 @@ lista.prepend(0)
 p lista.size
 p lista.head
 p lista.tail
-p lista.at 3
+p lista.at 2
