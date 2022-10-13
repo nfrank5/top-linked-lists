@@ -22,10 +22,6 @@ class LinkedList
     Node.total_number_of_nodes
   end
 
-  def head
-    @head
-  end
-
   def tail
     current_node = @head
     loop do
@@ -49,17 +45,19 @@ class LinkedList
   end
 
   def pop
+    return nil if @head.nil?
+    
     count = 0
     current_node = @head
     loop do
-      break if current_node.nil?
+      break if current_node.next_node.nil?
 
       current_node = current_node.next_node
       count += 1
     end
+    at(count-1).next_node = nil
     current_node
   end
-
 end
 
 
@@ -89,6 +87,8 @@ end
 
 
 lista = LinkedList.new
+p lista.pop
+
 lista.append(1)
 lista.append(2)
 lista.append(3)
@@ -98,3 +98,5 @@ p lista.size
 p lista.head
 p lista.tail
 p lista.at 2
+p lista.pop
+p lista
